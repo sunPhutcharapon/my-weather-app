@@ -35,7 +35,7 @@ async function getWeather(city) {
 
 function updateBackground(weatherMain, sunrise, sunset) {
     const body = document.body;
-    const now = Date.now() / 1000;
+    const now = Date.now() / 1000; // แปลงเป็นวินาที
 
     // เช็กเวลากลางวัน/กลางคืน
     const isDay = now >= sunrise && now < sunset;
@@ -70,10 +70,13 @@ function updateBackground(weatherMain, sunrise, sunset) {
     }
 }
 
+
 function displayWeather(data) {
     const { name, main, weather } = data;
     const { temp, humidity } = main;
     const { description, icon } = weather[0];
+    updateBackground(weather[0].main);
+    updateBackground(weather[0].main, data.sys.sunrise, data.sys.sunset);
 
     const weatherHtml = `
         <h2 class="text-2xl font-bold">${name}</h2>
@@ -83,7 +86,7 @@ function displayWeather(data) {
         <p>ความชื้น: ${humidity}%</p>
     `;
     weatherInfoContainer.innerHTML = weatherHtml;
-    
+
 }
 
 async function getForecast(city) {
@@ -119,8 +122,7 @@ function displayForecast(data) {
         <h3>พยากรณ์ 5 วัน</h3>
         <div class="forecast-container">${forecastHtml}</div>
     `;
-}
-
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     const lastCity = localStorage.getItem('lastCity');
