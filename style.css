@@ -70,3 +70,16 @@ h1 {
     color: #ff4d4d;
     font-weight: bold;
 }
+.forecast-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+.forecast-item {
+    background: rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    min-width: 100px;
+}
